@@ -16,7 +16,9 @@ teleport_pidfile: '/var/run/teleport.pid'
 teleport_auth_enabled: true
 teleport_auth_listen_address: '0.0.0.0:3025'
 teleport_auth_cluster_name: 'main'
-teleport_auth_tokens: []
+teleport_auth_tokens_node: []
+teleport_auth_tokens_proxy: []
+teleport_auth_tokens_auth: []
 teleport_auth_trusted_clusters: []
 teleport_auth_oidc_connectors: []
 

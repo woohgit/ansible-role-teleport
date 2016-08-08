@@ -32,7 +32,9 @@ Teleport stores the data locally under the `teleport_data_dir`.
     teleport_auth_enabled: true
     teleport_auth_listen_address: '0.0.0.0:3025'
     teleport_auth_cluster_name: 'main'
-    teleport_auth_tokens: []
+    teleport_auth_tokens_node: []
+    teleport_auth_tokens_proxy: []
+    teleport_auth_tokens_auth: []
     teleport_auth_trusted_clusters: []
     teleport_auth_oidc_connectors: []
 
@@ -83,7 +85,8 @@ For more details about teleport architecture, please refer to the [official docu
 *Inside `vars/main.yml`*
 
     teleport_ssh_enabled: false
-    teleport_auth_tokens: xxxx-yyyy-xxxx
+    teleport_auth_tokens_node:
+      - xxxx-yyyy-xxxx
 
 If you want to be able to login to the proxy host too using teleport, set `teleport_ssh_enabled` to `true`.
 
@@ -105,7 +108,7 @@ You can automatically connect a node to the proxy server by providing same same 
     teleport_auth_enabled: false
     teleport_proxy_enabled: false
     teleport_auth_servers:
-        - <ip_of_the_proxy_server>
+      - <ip_of_the_proxy_server>
     teleport_auth_token: xxxx-yyyy-xxxx
 
 

@@ -32,10 +32,17 @@ auth_service:
     - key_file: {{ cluster_ca }}
 {% endfor %}
 {% endif %}
-{% if teleport_auth_tokens|length > 0 %}
+{% if teleport_auth_tokens_node|length > 0 or teleport_auth_tokens_proxy|length > 0 or teleport_auth_tokens_auth|length > 0 %}
   tokens:
-    - "proxy,node:{{ teleport.token }}"
-    - "auth:{{ teleport.token }}"
+{% for token in teleport_auth_tokens_node %}
+    - "node:{{ token }}"
+{% endfor %}
+{% for token in teleport_auth_tokens_proxy %}
+    - "proxy:{{ token }}"
+{% endfor %}
+{% for token in teleport_auth_tokens_auth %}
+    - "auth:{{ token }}"
+{% endfor %}
 {% endif %}
 {% else %}
   enabled: "no"

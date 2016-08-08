@@ -2,7 +2,7 @@
 - name: Create teleport service (systemd).
   template:
     src: "teleport.service.j2"
-    dest: "/usr/lib/systemd/system/teleport.service"
+    dest: "{{ systemd_service_dir }}/teleport.service"
     owner: "root"
     group: "root"
     mode: 0644

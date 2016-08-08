@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/woohgit/ansible-role-teleport.svg?branch=master)](https://travis-ci.org/woohgit/ansible-role-teleport)
 
-An Ansible Role that installs Teleport on RHEL/CentOS, Debian/Ubuntu, SLES.
+An Ansible Role that installs Teleport on RHEL/CentOS, Debian/Ubuntu.
 
 ## Requirements
 

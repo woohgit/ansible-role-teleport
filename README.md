@@ -68,6 +68,7 @@ There are three types of services (roles) in a Teleport cluster.
 - Auth service provides authentication and authorization service to proxies and nodes. It is the certificate authority (CA) of a cluster and the storage for audit logs. It is the only stateful component of a Teleport cluster.
 - Node role provides the SSH access to a node. Typically every machine in a cluster runs teleport with this role. It is stateless and lightweight.
 
+For more details about teleport architecture, please refer to the [official documentation](http://gravitational.com/teleport/docs/architecture/#architecture).
 
 ## Example Playbook for setting up a Teleport proxy and auth server without node role.
 

@@ -1,0 +1,8 @@
+---
+- name: Create teleport service (SysVinit).
+  template:
+    src: "teleport.sysvinit.j2"
+    dest: "/etc/init.d/teleport"
+    owner: "root"
+    group: "root"
+    mode: 0744

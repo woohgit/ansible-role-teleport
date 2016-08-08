@@ -14,6 +14,7 @@
     url: "https://github.com/gravitational/teleport/releases/download/v{{ teleport_version }}/teleport-v{{ teleport_version }}-linux-amd64-bin.tar.gz"
     dest: "/tmp/teleport-v{{ teleport_version }}-linux-amd64-bin.tar.gz"
     mode: 0755
+    validate_certs: no
   when: not teleport_bin.stat.exists
 
 - name: Unarchive teleport.
@@ -42,6 +43,9 @@
 
 - include: configure-Upstart.yml
   when: ansible_service_mgr == 'upstart'
+  
+- include: configure-Sysvinit.yml
+  when: ansible_service_mgr == 'sysvinit'
 
 - name: Ensure teleport has selected state and enabled on boot.
   service:

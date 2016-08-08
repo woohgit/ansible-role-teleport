@@ -2,7 +2,10 @@
 
 [![Build Status](https://travis-ci.org/woohgit/ansible-role-teleport.svg?branch=master)](https://travis-ci.org/woohgit/ansible-role-teleport)
 
-An Ansible Role that installs Teleport on RHEL/CentOS, Debian/Ubuntu.
+An Ansible Role that installs [Teleport](https://gravitational.com/teleport/) on RHEL/CentOS, Debian/Ubuntu, SUSE.
+
+Teleport is an SSH for Clusters and Teams
+
 
 ## Requirements
 
@@ -50,6 +53,8 @@ If you want to disable the WebUI (proxy), set this setting to `false`.
     teleport_proxy_tunnel_listen_address: '0.0.0.0:3024'
     teleport_proxy_https_key_file: ''
     teleport_proxy_https_cert_file: ''
+
+For full reference see the official [teleport documentation by gravitational](http://gravitational.com/teleport/docs/quickstart/).
 
 ## Dependencies
 

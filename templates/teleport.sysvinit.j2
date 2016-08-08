@@ -41,7 +41,7 @@ function soft_stop () {
 function force_stop () {
     echo -n "Shutting down teleport daemon *with all active connections*"
     trap '' TERM
-    killall sshd 2>/dev/null
+    killall teleport 2>/dev/null
     trap - TERM
 }
 
@@ -107,7 +107,7 @@ case "$1" in
     force-reload|reload)
         ## Signal the daemon to reload its config. Most daemons
         ## do this on signal 1 (SIGHUP).
-        echo -n "Reload service sshd"
+        echo -n "Reload service teleport"
 
         killproc -p $TELEPORT_PIDFILE -HUP $TELEPORT_BIN
 

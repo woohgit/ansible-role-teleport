@@ -4,7 +4,7 @@ teleport:
 {% if teleport_auth_token %}  
   auth_token: {{ teleport_auth_token }}
 {% endif %}
-{if teleport_advertise_ip %}
+{% if teleport_advertise_ip | default(false) %}
   advertise_ip: {{ teleport_advertise_ip }}
 {% endif %}
   auth_servers:
@@ -21,7 +21,7 @@ teleport:
     type: {{ teleport_storage_type }}
   data_dir: {{ teleport_data_dir }}
 auth_service:
-{% if teleport_auth_enabled %}
+{% if teleport_auth_enabled | default(false) %}
   enabled: "yes"
   listen_addr: {{ teleport_auth_listen_address }}
   oidc_connectors: []
@@ -34,21 +34,21 @@ auth_service:
 {% endif %}
 {% if teleport_auth_tokens|length > 0 %}
   tokens:
-    - "proxy,node:{{teleport.token}}"
-    - "auth:{{teleport.token}}"
+    - "proxy,node:{{ teleport.token }}"
+    - "auth:{{ teleport.token }}"
 {% endif %}
 {% else %}
   enabled: "no"
 {% endif %}
 ssh_service:
-{% if teleport_ssh_enabled %}
+{% if teleport_ssh_enabled | default(false) %}
   enabled: "yes"
   listen_addr: {{ teleport_ssh_listen_address }}
 {% else %}
   enabled: "no"
 {% endif %}
 proxy_service:
-{% if teleport_proxy_enabled %}
+{% if teleport_proxy_enabled | default(false) %}
   enabled: "yes"
   listen_addr: {{ teleport_proxy_listen_address }}
   web_listen_addr: {{ teleport_proxy_web_listen_address }}

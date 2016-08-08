@@ -5,4 +5,8 @@
     dest: "/etc/init/teleport.conf"
     owner: "root"
     group: "root"
-    mode: 0744
+    mode: 0644
+
+- name: initctl reload-configuration
+  shell: initctl reload-configuration
+  become: yes

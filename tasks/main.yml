@@ -21,8 +21,9 @@
 
 - name: Install teleport.
   command: >
-    sudo make install
+    make install
     chdir=/tmp/teleport
+  become: yes
   when: not teleport_bin.stat.exists
 
 - name: Create teleport config.

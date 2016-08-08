@@ -6,3 +6,7 @@
     owner: "root"
     group: "root"
     mode: 0644
+
+- name: systemctl daemon-reload
+  shell: systemctl daemon-reload
+  become: yes

@@ -14,10 +14,6 @@ env:
     version: 16.04
     init: /sbin/init
     run_opts: ""
-  - distribution: fedora
-    version: 24
-    init: /sbin/init
-    run_opts: ""
 
 services:
   - docker

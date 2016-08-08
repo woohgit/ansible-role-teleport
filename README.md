@@ -60,7 +60,17 @@ For full reference see the official [teleport documentation by gravitational](ht
 
 None.
 
-## Example Playbook
+## Core Concepts
+
+There are three types of services (roles) in a Teleport cluster.
+
+- Proxy service accepts inbound connections from the clients and routes them to the appropriate nodes. The proxy also serves the Web UI.
+- Auth service provides authentication and authorization service to proxies and nodes. It is the certificate authority (CA) of a cluster and the storage for audit logs. It is the only stateful component of a Teleport cluster.
+- Node role provides the SSH access to a node. Typically every machine in a cluster runs teleport with this role. It is stateless and lightweight.
+
+
+## Example Playbook for setting up a Teleport proxy and auth server without node role.
+
 
     - hosts: teleport_proxies
       vars_files:
@@ -68,9 +78,35 @@ None.
       roles:
         - { role: woohgit.teleport }
 
-*Inside `vars/main.yml`*:
+
+*Inside `vars/main.yml`*
 
     teleport_ssh_enabled: false
+    teleport_auth_tokens: xxxx-yyyy-xxxx
+
+If you want to be able to login to the proxy host too using teleport, set `teleport_ssh_enabled` to `true`.
+
+
+## Example Playbook for setting up a Teleport node.
+
+You can automatically connect a node to the proxy server by providing same same auth_token.
+
+    - hosts: teleport_nodes
+      vars_files:
+        - vars/main.yml
+      roles:
+        - { role: woohgit.teleport }
+
+
+*Inside `vars/main.yml`*:
+
+    teleport_ssh_enabled: true
+    teleport_auth_enabled: false
+    teleport_proxy_enabled: false
+    teleport_auth_servers:
+        - <ip_of_the_proxy_server>
+    teleport_auth_token: xxxx-yyyy-xxxx
+
 
 ## License
 

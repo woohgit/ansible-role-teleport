@@ -13,7 +13,7 @@ env:
   - distribution: ubuntu
     version: 16.04
     init: /sbin/init
-    run_opts: ""
+    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
 
 services:
   - docker

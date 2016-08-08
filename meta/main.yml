@@ -1,0 +1,36 @@
+galaxy_info:
+  author: Adam Papai
+  description: An Ansible role for installing Teleport cluster.
+  company: "CloudBees Inc."
+  license: "license (BSD, MIT)"
+  
+  min_ansible_version: 1.9
+
+  platforms:
+    - name: EL
+      versions:
+      - all
+    - name: Fedora
+      versions:
+      - all
+    - name: opensuse
+      versions:
+      - all
+    - name: Ubuntu
+      versions:
+      - all
+    - name: SLES
+      versions:
+      - all
+    - name: GenericLinux
+      versions:
+      - all
+    - name: Debian
+      versions:
+      - all
+  
+  galaxy_tags:
+    - ssh
+    - cluster
+
+dependencies: []

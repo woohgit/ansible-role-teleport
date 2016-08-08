@@ -1,0 +1,8 @@
+---
+- name: Create teleport service (systemd).
+  template:
+    src: "teleport.service.j2"
+    dest: "/etc/systemd/system/multi-user.target.wants/teleport.service"
+    owner: "root"
+    group: "root"
+    mode: 0644

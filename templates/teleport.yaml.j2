@@ -1,0 +1,62 @@
+teleport:
+  nodename: {{ teleport_nodename }}
+  pid_file: {{ teleport_pidfile }}
+{% if teleport_auth_token %}  
+  auth_token: {{ teleport_auth_token }}
+{% endif %}
+{if teleport_advertise_ip %}
+  advertise_ip: {{ teleport_advertise_ip }}
+{% endif %}
+  auth_servers:
+{% for auth_server in teleport_auth_servers %}
+  - {{ auth_server }}
+{% endfor %}
+  connection_limits:
+    max_connections: 1000
+    max_users: 250
+  log:
+    output: stderr
+    severity: {{ teleport_log_level }}
+  storage:
+    type: {{ teleport_storage_type }}
+  data_dir: {{ teleport_data_dir }}
+auth_service:
+{% if teleport_auth_enabled %}
+  enabled: "yes"
+  listen_addr: {{ teleport_auth_listen_address }}
+  oidc_connectors: []
+  cluster_name: {{ teleport_auth_cluster_name }}
+{% if teleport_auth_trusted_clusters|length > 0 %}
+  trusted_clusters:
+{% for cluster_ca in teleport_auth_trusted_clusters %}
+    - key_file: {{ cluster_ca }}
+{% endfor %}
+{% endif %}
+{% if teleport_auth_tokens|length > 0 %}
+  tokens:
+    - "proxy,node:{{teleport.token}}"
+    - "auth:{{teleport.token}}"
+{% endif %}
+{% else %}
+  enabled: "no"
+{% endif %}
+ssh_service:
+{% if teleport_ssh_enabled %}
+  enabled: "yes"
+  listen_addr: {{ teleport_ssh_listen_address }}
+{% else %}
+  enabled: "no"
+{% endif %}
+proxy_service:
+{% if teleport_proxy_enabled %}
+  enabled: "yes"
+  listen_addr: {{ teleport_proxy_listen_address }}
+  web_listen_addr: {{ teleport_proxy_web_listen_address }}
+  tunnel_listen_addr: {{ teleport_proxy_tunnel_listen_address }}
+{% if teleport_proxy_https_key_file %}
+  https_key_file: {{ teleport_proxy_https_key_file }}
+  https_cert_file: {{ teleport_proxy_https_cert_file }}
+{% endif %}
+{% else %}
+  enabled: "no"
+{% endif %}

@@ -1,0 +1,9 @@
+description "Teleport SSH Service"
+author  "Adam Papai <wooh@wooh.hu>"
+
+start on (started networking)
+stop on runlevel [016]
+
+/usr/local/bin/teleport start --config={{ teleport_config_path }}
+
+respawn

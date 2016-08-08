@@ -1,0 +1,8 @@
+---
+- name: Create teleport service (upstart).
+  template:
+    src: "teleport.upstart.j2"
+    dest: "/etc/init/teleport.conf"
+    owner: "root"
+    group: "root"
+    mode: 0744

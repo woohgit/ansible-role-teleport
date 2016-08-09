@@ -9,7 +9,7 @@ teleport:
 {% endif %}
   auth_servers:
 {% for auth_server in teleport_auth_servers %}
-  - {{ auth_server }}
+    - {{ auth_server }}
 {% endfor %}
   connection_limits:
     max_connections: 1000

@@ -1,6 +1,6 @@
 # Ansible Role: Teleport
 
-[![Build Status](https://travis-ci.org/woohgit/ansible-role-teleport.svg?branch=master)](https://travis-ci.org/woohgit/ansible-role-teleport)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-woohgit.teleport-blue.svg)](https://galaxy.ansible.com/woohgit/teleport/) [![Build Status](https://travis-ci.org/woohgit/ansible-role-teleport.svg?branch=master)](https://travis-ci.org/woohgit/ansible-role-teleport)
 
 An Ansible Role that installs [Teleport](https://gravitational.com/teleport/) on RHEL/CentOS, Debian/Ubuntu, SUSE.
 
@@ -32,9 +32,15 @@ Teleport stores the data locally under the `teleport_data_dir`.
     teleport_auth_enabled: true
     teleport_auth_listen_address: '0.0.0.0:3025'
     teleport_auth_cluster_name: 'main'
+
+
     teleport_auth_tokens_node: []
     teleport_auth_tokens_proxy: []
     teleport_auth_tokens_auth: []
+
+
+You probably want to have multiple nodes joined to our cluster. You can do that with temporary tokens or you can automate the process and use static tokens. The 3 well known roles - auth, proxy, node - can have 3 different tokens.
+
     teleport_auth_trusted_clusters: []
     teleport_auth_oidc_connectors: []
 
@@ -108,7 +114,7 @@ You can automatically connect a node to the proxy server by providing same same 
     teleport_auth_enabled: false
     teleport_proxy_enabled: false
     teleport_auth_servers:
-      - <ip_of_the_proxy_server>
+      - ip_of_the_proxy_server
     teleport_auth_token: xxxx-yyyy-xxxx
 
 

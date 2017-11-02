@@ -21,7 +21,7 @@ You will need to provide your own SSL certificate and key files. You can generat
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    teleport_version: "1.0.4"
+    teleport_version: "2.3.5"
     teleport_ssl_cert_path: "/etc/teleport"
     teleport_config_path: "/etc/teleport.yaml"
     teleport_nodename: "teleport"

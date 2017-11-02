@@ -7,24 +7,20 @@
   register: teleport_bin
 
 - name: Install make.
-  package: name=make state=present
-
-- name: Download teleport installer.
-  get_url:
-    url: "https://github.com/gravitational/teleport/releases/download/v{{ teleport_version }}/teleport-v{{ teleport_version }}-linux-amd64-bin.tar.gz"
-    dest: "/tmp/teleport-v{{ teleport_version }}-linux-amd64-bin.tar.gz"
-    mode: 0755
-  when: not teleport_bin.stat.exists
+  package:
+    name: make
+    state: present
 
 - name: Unarchive teleport.
-  command: >
-    tar -xzvf teleport-v{{ teleport_version }}-linux-amd64-bin.tar.gz
-    chdir=/tmp
+  unarchive:
+    src: "https://github.com/gravitational/teleport/releases/download/v{{ teleport_version }}/teleport-v{{ teleport_version }}-linux-amd64-bin.tar.gz"
+    dest: /tmp
+    remote_src: yes
   when: not teleport_bin.stat.exists
 
 - name: Install teleport.
   command: >
-    make install
+    ./install
     chdir=/tmp/teleport
   become: yes
   when: not teleport_bin.stat.exists
@@ -37,13 +33,13 @@
     group: "root"
     mode: 0600
 
-- include: configure-Systemd.yml
+- include_tasks: configure-Systemd.yml
   when: ansible_service_mgr == 'systemd'
 
-- include: configure-Upstart.yml
+- include_tasks: configure-Upstart.yml
   when: ansible_service_mgr == 'upstart'
   
-- include: configure-Sysvinit.yml
+- include_tasks: configure-Sysvinit.yml
   when: ansible_service_mgr == 'sysvinit'
 
 - name: Ensure teleport has selected state and enabled on boot.

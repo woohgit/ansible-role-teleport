@@ -4,6 +4,6 @@ author  "Adam Papai <wooh@wooh.hu>"
 start on (started networking)
 stop on runlevel [016]
 
-exec /usr/local/bin/teleport start --config={{ teleport_config_path }}
+exec /usr/local/bin/teleport start --config={{ teleport_config_path }} {{ teleport_opts | default('') }}
 
 respawn

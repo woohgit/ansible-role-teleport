@@ -20,7 +20,7 @@ test -x $TELEPORT_BIN || exit 5
 
 TELEPORT_PIDFILE={{ teleport_pidfile }}
 
-TELEPORT_OPTS="start --config={{ teleport_config_path }}"
+TELEPORT_OPTS="start --config={{ teleport_config_path }} {{ teleport_opts | default('') }}"
 
 . /etc/rc.status
 
@@ -67,10 +67,11 @@ case "$1" in
         else
             soft_stop
         fi
-        
+
         # Remember status and be verbose
         rc_status -v
         ;;
+
     soft-stop)
         ## Stop the listener daemon process with killproc(8) and if this
         ## fails set echo the echo return value.
@@ -87,7 +88,7 @@ case "$1" in
         rc_status -v
         ;;
     try-restart)
-        ## Stop the service and if this succeeds (i.e. the 
+        ## Stop the service and if this succeeds (i.e. the
         ## service was running before), start it again.
         $0 status >/dev/null &&  $0 restart
 
@@ -95,7 +96,7 @@ case "$1" in
         rc_status
         ;;
     restart)
-        ## Stop the service without closing live connections 
+        ## Stop the service without closing live connections
         ## and start it again regardless of whether it was
         ## running or not
         $0 soft-stop

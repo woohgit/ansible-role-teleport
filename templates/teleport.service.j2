@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=simple
 Restart=always
-ExecStart=/usr/local/bin/teleport start --config={{ teleport_config_path }}
+ExecStart=/usr/local/bin/teleport start --config={{ teleport_config_path }} {{ teleport_opts | default('') }}
 
 [Install]
 WantedBy=multi-user.target

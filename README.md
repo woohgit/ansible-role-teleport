@@ -26,7 +26,7 @@ Available variables are listed below, along with default values (see `defaults/m
 Teleport stores the data locally under the `teleport_data_dir`.
 
     teleport_log_level: 'WARN'
-    teleport_storage_type: 'bold'
+    teleport_storage_type: 'bolt'
     teleport_pidfile: '/var/run/teleport.pid'
 
     teleport_auth_enabled: true

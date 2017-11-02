@@ -33,9 +33,6 @@
     group: "root"
     mode: 0600
 
-- name: Debug ansible_service_mgr
-  debug: msg="{{ ansible_service_mgr }}"
-
 - include_tasks: configure-Systemd.yml
   when: ansible_service_mgr == 'systemd'
 

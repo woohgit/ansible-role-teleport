@@ -15,7 +15,7 @@ teleport:
     max_connections: 1000
     max_users: 250
   log:
-    output: stderr
+    output: syslog
     severity: {{ teleport_log_level }}
   storage:
     type: {{ teleport_storage_type }}

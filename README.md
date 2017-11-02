@@ -6,6 +6,12 @@ An Ansible Role that installs [Teleport](https://gravitational.com/teleport/) on
 
 Teleport is an SSH for Clusters and Teams
 
+## Install
+
+```
+ansible-galaxy install woohgit.teleport
+```
+
 
 ## Requirements
 

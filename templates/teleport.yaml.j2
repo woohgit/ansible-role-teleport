@@ -2,14 +2,14 @@ teleport:
   nodename: {{ teleport_nodename }}
   pid_file: {{ teleport_pidfile }}
 {% if teleport_auth_token %}  
-  auth_token: {{ teleport_auth_token }}
+  auth_token: "{{ teleport_auth_token }}"
 {% endif %}
 {% if teleport_advertise_ip | default(false) %}
-  advertise_ip: {{ teleport_advertise_ip }}
+  advertise_ip: "{{ teleport_advertise_ip }}"
 {% endif %}
   auth_servers:
 {% for auth_server in teleport_auth_servers %}
-    - {{ auth_server }}
+    - "{{ auth_server }}"
 {% endfor %}
   connection_limits:
     max_connections: 1000
@@ -23,7 +23,7 @@ teleport:
 auth_service:
 {% if teleport_auth_enabled | default(false) %}
   enabled: "yes"
-  listen_addr: {{ teleport_auth_listen_address }}
+  listen_addr: "{{ teleport_auth_listen_address }}"
   oidc_connectors: []
   cluster_name: {{ teleport_auth_cluster_name }}
 {% if teleport_auth_trusted_clusters|length > 0 %}
@@ -50,16 +50,16 @@ auth_service:
 ssh_service:
 {% if teleport_ssh_enabled | default(false) %}
   enabled: "yes"
-  listen_addr: {{ teleport_ssh_listen_address }}
+  listen_addr: "{{ teleport_ssh_listen_address }}"
 {% else %}
   enabled: "no"
 {% endif %}
 proxy_service:
 {% if teleport_proxy_enabled | default(false) %}
   enabled: "yes"
-  listen_addr: {{ teleport_proxy_listen_address }}
-  web_listen_addr: {{ teleport_proxy_web_listen_address }}
-  tunnel_listen_addr: {{ teleport_proxy_tunnel_listen_address }}
+  listen_addr: "{{ teleport_proxy_listen_address }}"
+  web_listen_addr: "{{ teleport_proxy_web_listen_address }}"
+  tunnel_listen_addr: "{{ teleport_proxy_tunnel_listen_address }}"
 {% if teleport_proxy_https_key_file %}
   https_key_file: {{ teleport_proxy_https_key_file }}
   https_cert_file: {{ teleport_proxy_https_cert_file }}

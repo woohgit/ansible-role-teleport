@@ -35,8 +35,16 @@ Teleport stores the data locally under the `teleport_data_dir`.
     teleport_storage_type: 'bolt'
     teleport_pidfile: '/var/run/teleport.pid'
 
+    teleport_default_address: '0.0.0.0'
+
+This sets the default address used in the various `*_listen_address` variables
+below. The default of `'0.0.0.0'` means to listen on all IPv4 interfaces.
+Setting it to `'::'` would listen on all IPv6 (and IPv4, if your hosts have the
+appropriate networking option enabled) addresses. (Note that Teleport's IPv6
+support is not yet official; use this at your own risk.)
+
     teleport_auth_enabled: true
-    teleport_auth_listen_address: '0.0.0.0:3025'
+    teleport_auth_listen_address: '{{ teleport_default_address | ipwrap }}:3025'
     teleport_auth_cluster_name: 'main'
 
 
@@ -55,16 +63,16 @@ You probably want to have multiple nodes joined to our cluster. You can do that 
 
 If you don't want to login to this server using Teleport, only via the standard SSH way, disable the SSH service by setting this value to `false`.
     
-    teleport_ssh_listen_address: '0.0.0.0:3022'
+    teleport_ssh_listen_address: '{{ teleport_default_address | ipwrap }}:3022'
     teleport_commands: []
 
     teleport_proxy_enabled: true
 
 If you want to disable the WebUI (proxy), set this setting to `false`.
 
-    teleport_proxy_listen_address: '0.0.0.0:3023'
-    teleport_proxy_web_listen_address: '0.0.0.0:3080'
-    teleport_proxy_tunnel_listen_address: '0.0.0.0:3024'
+    teleport_proxy_listen_address: '{{ teleport_default_address | ipwrap }}:3023'
+    teleport_proxy_web_listen_address: '{{ teleport_default_address | ipwrap }}:3080'
+    teleport_proxy_tunnel_listen_address: '{{ teleport_default_address | ipwrap }}:3024'
     teleport_proxy_https_key_file: ''
     teleport_proxy_https_cert_file: ''
 

@@ -12,9 +12,11 @@ teleport_log_level: 'WARN'
 teleport_storage_type: 'bolt'
 teleport_pidfile: '/var/run/teleport.pid'
 
+teleport_default_address: '0.0.0.0'
+
 # auth service
 teleport_auth_enabled: true
-teleport_auth_listen_address: '0.0.0.0:3025'
+teleport_auth_listen_address: '{{ teleport_default_address | ipwrap }}:3025'
 teleport_auth_cluster_name: 'main'
 teleport_auth_tokens_node: []
 teleport_auth_tokens_proxy: []
@@ -24,13 +26,13 @@ teleport_auth_oidc_connectors: []
 
 # ssh service
 teleport_ssh_enabled: true
-teleport_ssh_listen_address: '0.0.0.0:3022'
+teleport_ssh_listen_address: '{{ teleport_default_address | ipwrap }}:3022'
 teleport_commands: []
 
 # proxy service
 teleport_proxy_enabled: true
-teleport_proxy_listen_address: '0.0.0.0:3023'
-teleport_proxy_web_listen_address: '0.0.0.0:3080'
-teleport_proxy_tunnel_listen_address: '0.0.0.0:3024'
+teleport_proxy_listen_address: '{{ teleport_default_address | ipwrap }}:3023'
+teleport_proxy_web_listen_address: '{{ teleport_default_address | ipwrap }}:3080'
+teleport_proxy_tunnel_listen_address: '{{ teleport_default_address | ipwrap }}:3024'
 teleport_proxy_https_key_file: ''
 teleport_proxy_https_cert_file: ''

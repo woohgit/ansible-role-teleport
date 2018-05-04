@@ -13,7 +13,7 @@
 
 - name: Unarchive teleport.
   unarchive:
-    src: "https://github.com/gravitational/teleport/releases/download/v{{ teleport_version }}/teleport-v{{ teleport_version }}-linux-amd64-bin.tar.gz"
+    src: "{{ teleport_url }}"
     dest: /tmp
     remote_src: yes
   when: not teleport_bin.stat.exists
@@ -38,7 +38,7 @@
 
 - include_tasks: configure-Upstart.yml
   when: ansible_service_mgr == 'upstart'
-  
+
 - include_tasks: configure-Sysvinit.yml
   when: ansible_service_mgr == 'sysvinit'
 

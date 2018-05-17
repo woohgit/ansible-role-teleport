@@ -22,6 +22,7 @@ You will need to provide your own SSL certificate and key files. You can generat
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
     teleport_version: "2.3.5"
+    teleport_url: "https://github.com/gravitational/teleport/releases/download/v{{ teleport_version }}/teleport-v{{ teleport_version }}-linux-amd64-bin.tar.gz"
     teleport_ssl_cert_path: "/etc/teleport"
     teleport_config_path: "/etc/teleport.yaml"
     teleport_nodename: "teleport"
@@ -54,7 +55,7 @@ You probably want to have multiple nodes joined to our cluster. You can do that 
     teleport_ssh_enabled: true
 
 If you don't want to login to this server using Teleport, only via the standard SSH way, disable the SSH service by setting this value to `false`.
-    
+
     teleport_ssh_listen_address: '0.0.0.0:3022'
     teleport_commands: []
 

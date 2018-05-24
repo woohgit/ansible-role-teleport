@@ -81,7 +81,8 @@ For full reference see the official [teleport documentation by gravitational](ht
 
 ## Dependencies
 
-None.
+- Ansible 2.4 or newer
+- Python `netaddr` package (available on Debian/EPEL as `python-netaddr`)
 
 ## Core Concepts
 

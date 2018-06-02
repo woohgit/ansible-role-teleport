@@ -24,6 +24,13 @@ auth_service:
 {% if teleport_auth_enabled | default(false) %}
   enabled: "yes"
   listen_addr: "{{ teleport_auth_listen_address }}"
+{% if teleport_u2f_app_id | default(false) %}
+  authentication:
+    type: local
+    second_factor: u2f
+    u2f:
+      app_id: "{{ teleport_u2f_app_id }}"
+{% endif %}
   oidc_connectors: []
   cluster_name: {{ teleport_auth_cluster_name }}
 {% if teleport_auth_trusted_clusters|length > 0 %}

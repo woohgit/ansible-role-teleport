@@ -30,6 +30,8 @@ auth_service:
     second_factor: u2f
     u2f:
       app_id: "{{ teleport_u2f_app_id }}"
+      facets:
+        - "{{ teleport_u2f_app_id }}"
 {% endif %}
   oidc_connectors: []
   cluster_name: {{ teleport_auth_cluster_name }}

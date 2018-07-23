@@ -4,8 +4,10 @@ After=network.target
 
 [Service]
 Type=simple
-Restart=always
+Restart=on-failure
 ExecStart=/usr/local/bin/teleport start --config={{ teleport_config_path }} {{ teleport_opts | default('') }}
+ExecReload=/bin/kill -HUP $MAINPID
+PIDFile=/var/run/teleport.pid
 
 [Install]
 WantedBy=multi-user.target

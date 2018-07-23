@@ -3,8 +3,10 @@
   include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Check if teleport is installed.
-  stat: "path=/usr/local/bin/teleport"
-  register: teleport_bin
+  command: "/usr/local/bin/teleport version"
+  changed_when: False
+  register: teleport_version_check
+  failed_when: false
 
 - name: Install make.
   package:
@@ -13,17 +15,17 @@
 
 - name: Unarchive teleport.
   unarchive:
-    src: "{{ teleport_url }}"
+    src: "https://get.gravitational.com/teleport-v{{ teleport_version }}-linux-amd64-bin.tar.gz"
     dest: /tmp
     remote_src: yes
-  when: not teleport_bin.stat.exists
+  when: "(teleport_version not in teleport_version_check.stdout) or teleport_version_check.rc >= 1"
 
 - name: Install teleport.
   command: >
     ./install
     chdir=/tmp/teleport
   become: yes
-  when: not teleport_bin.stat.exists
+  when: "(teleport_version not in teleport_version_check.stdout) or teleport_version_check.rc >= 1"
 
 - name: Create teleport config.
   template:
@@ -45,5 +47,5 @@
 - name: Ensure teleport has selected state and enabled on boot.
   service:
     name: 'teleport'
-    state: 'started'
+    state: 'reloaded'
     enabled: yes

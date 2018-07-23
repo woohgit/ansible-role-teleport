@@ -18,14 +18,14 @@
     src: "https://get.gravitational.com/teleport-v{{ teleport_version }}-linux-amd64-bin.tar.gz"
     dest: /tmp
     remote_src: yes
-  when: "(teleport_version not in teleport_version_check.stdout) or teleport_version_check.rc >= 1"
+  when: "teleport_version_check.rc >= 1 or (teleport_version not in teleport_version_check.stdout)"
 
 - name: Install teleport.
   command: >
     ./install
     chdir=/tmp/teleport
   become: yes
-  when: "(teleport_version not in teleport_version_check.stdout) or teleport_version_check.rc >= 1"
+  when: "teleport_version_check.rc >= 1 or (teleport_version not in teleport_version_check.stdout)"
 
 - name: Create teleport config.
   template:

@@ -4,7 +4,7 @@
 
 - name: Check if teleport is installed.
   command: "/usr/local/bin/teleport version"
-  changed_when: False
+  changed_when: false
   register: teleport_version_check
   failed_when: false
 
@@ -49,3 +49,4 @@
     name: 'teleport'
     state: 'reloaded'
     enabled: yes
+  changed_when: false

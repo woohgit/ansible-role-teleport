@@ -6,6 +6,7 @@ After=network.target
 Type=simple
 Restart=always
 ExecStart=/usr/local/bin/teleport start --config={{ teleport_config_path }} {{ teleport_opts | default('') }}
+KillMode=process
 
 [Install]
 WantedBy=multi-user.target

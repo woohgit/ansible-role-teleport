@@ -60,6 +60,13 @@ You probably want to have multiple nodes joined to our cluster. You can do that 
     teleport_auth_oidc_connectors: []
 
 
+    teleport_u2f_app_id: 'https://teleport.master.fqdn:3080
+
+Setting `teleport_u2f_app_id` puts the Teleport cluster into U2F mode. Instead
+of using basic TOTP 2FA, users will be required to set up and use a FIDO U2F
+hardware key instead.
+
+
     teleport_ssh_enabled: true
 
 If you don't want to login to this server using Teleport, only via the standard SSH way, disable the SSH service by setting this value to `false`.
